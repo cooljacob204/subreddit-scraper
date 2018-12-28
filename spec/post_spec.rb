@@ -18,13 +18,8 @@ describe Post do
     expect(@post.title == "Meme").to equal(true)
   end
 
-  it "Can initialize with a Url" do
-    new_post = Post.new("Test Meme", @subreddit, @user, :url => "lfp2.gg")
-    expect(new_post.url == "lfp2.gg").to equal(true)
-  end
-
-  it "Can intialize with text" do
-    new_post = Post.new("Test Meme", @subreddit, @user, :text => "testing the text")
-    expect(new_post.text == "testing the text").to equal(true)
+  it "Can initialize with a link" do
+    new_post = Post.new("Test Meme", @subreddit, @user, :link => "lfp2.gg")
+    expect(new_post.link == "lfp2.gg").to equal(true)
   end
 end

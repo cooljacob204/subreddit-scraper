@@ -14,6 +14,16 @@ describe User do
   end
   
   it "has a name" do
-    expect(@user.username == "cooljacob204").to equal(true)
+    expect(@user.name == "cooljacob204").to equal(true)
+  end
+
+  it "can find by name" do
+    expect(User.find_by_name("cooljacob204")).to equal(@user)
+  end
+
+  it "can find or create by name" do
+    expect(User.find_or_create_by_name("cooljacob204")).to equal(@user)
+    User.find_or_create_by_name("jfed")
+    expect(User.all.size).to equal(2)    
   end
 end

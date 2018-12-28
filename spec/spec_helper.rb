@@ -8,7 +8,7 @@ RSpec.configure do |config|
     Post.all.clear
     Subreddit.all.clear
     @user = User.new("cooljacob204")
-    @subreddit = Subreddit.new("programmerhumor", "/r/programmerhumor", "Not everybody understands the humor of programmers.")
+    @subreddit = Subreddit.new("programmerhumor", "Not everybody understands the humor of programmers.")
     @post = Post.new("Meme", @subreddit, @user)
   end
 end
