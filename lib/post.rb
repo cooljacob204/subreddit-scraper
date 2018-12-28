@@ -1,19 +1,20 @@
 module SubredditScraper
   class Post
-    attr_reader :title, :subreddit, :user, :text, :url
+    attr_reader :title, :subreddit, :user, :text, :link, :date
+    extend Memorable::ClassMethods
+    include Memorable::InstanceMethods
 
     @@all = []
     def initialize(title, subreddit, user, **args)
+      super()
       @title = title
       @subreddit = subreddit
       @subreddit.posts << self
       @user = user
       @user.posts << self
 
-      @url = args[:url]
-      @text = args[:text]
-
-      @@all << self
+      @link = args[:link]
+      @date = args[:date]
     end
 
     def self.all
