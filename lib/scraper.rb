@@ -1,6 +1,9 @@
 module SubredditScraper
   class Scraper
     def self.scrapeSubredditFromUrl(url)
+      url = stripUrl(url)
+      page = Nokogiri::HTML(open(url))
+      scrapeSubreddit(page)
     end
 
     def self.scrapeSubredditFromFile(path)
@@ -11,6 +14,12 @@ module SubredditScraper
 
     private
 
+    def self.stripUrl(url)
+      strippedUrl = "https://old.reddit.com"
+      strippedUrl << /\/r\/[a-zA-Z0-9\-_]*/.match(url).to_s
+      strippedUrl
+    end
+    
     def self.scrapeSubreddit(page)
       subredditName = page.css('h1.redditname').text
       description = page.css('blockquote').text.strip
