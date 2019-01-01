@@ -1,15 +1,25 @@
 module SubredditScraper
   class Scraper
     def self.scrapeSubredditFromUrl(url)
-      url = stripUrl(url)
-      page = Nokogiri::HTML(open(url))
-      scrapeSubreddit(page)
+      begin
+        url = stripUrl(url)
+        page = Nokogiri::HTML(open(url))
+        scrapeSubreddit(page)
+      rescue
+        return false
+      end
+      true
     end
 
     def self.scrapeSubredditFromFile(path)
-      html = File.read(path)
-      page = Nokogiri::HTML(html)
-      scrapeSubreddit(page)
+      begin
+        html = File.read(path)
+        page = Nokogiri::HTML(html)
+        scrapeSubreddit(page)
+      rescue
+        return false
+      end
+      true
     end
 
     private
