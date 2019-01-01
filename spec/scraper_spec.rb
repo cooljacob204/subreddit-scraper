@@ -6,8 +6,13 @@ describe Scraper do
     expect(Post.count).to equal(27)
   end
 
-  it "Initializes from Url" do
+  xit "Initializes from Url" do
     Scraper.scrapeSubredditFromUrl("reddit.com/r/funny")
     expect(Post.count).to be > 20
+  end
+
+  it "scraper returns false on bad url or file" do
+    expect(Scraper.scrapeSubredditFromFile('fixtures/ProgrammerssHumor.html')).to equal(false)
+    expect(Scraper.scrapeSubredditFromFile('google.com')).to equal(false)
   end
 end
