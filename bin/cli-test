@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+
+require "bundler/setup"
+require "./config/environment"
+
+cli = Cli.new
+Scraper.scrapeSubredditFromFile("./fixtures/ProgrammerHumor.html")
+cli.start
