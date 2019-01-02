@@ -11,7 +11,7 @@ module SubredditScraper
     end
     
     def start
-      puts "Welcome to my Subreddit Scrapper"
+      puts "Welcome to my Subreddit Scraper"
       puts "Press enter to continue"
       gets
       main_menu
@@ -21,8 +21,8 @@ module SubredditScraper
       puts "Main Menu"
       puts "Please enter an option"
       puts ""
-      puts "1. Scrap from URL"
-      puts "2. Scrap from File"
+      puts "1. Scrape from URL"
+      puts "2. Scrape from File"
       puts "3. Display Subreddit Menu"
       puts "4. Display Post Menu"
       puts "5. Display User Menu"
@@ -33,42 +33,49 @@ module SubredditScraper
     def main_menu_select(choice)
       case choice.strip.to_i
       when 1
-        scrape_from_url
+        scrape("url")
       when 2
-        scrape_from_file
+        scrape("file")
       when 3
-        list_users
+        subreddit_menu
       when 4
-        list_subreddits_by_user
+        post_menu
       when 5
-        list_posts_by_user
+        user_menu
       when 6
         return 0
       else
         puts "Error please try again"
+        sleep(2)
       end
       main_menu
     end
     
-    def scrape_from_url
-      puts "Enter URL"
-      if Scraper.scrapeSubredditFromUrl(gets.strip)
+    def scrape(type)
+      if type == "url"
+        puts "Enter URL"
+      else
+        puts "Enter File Path"
+      end
+
+      if (type == "url" ? Scraper.scrapeSubredditFromUrl(gets.strip) : Scraper.scrapeSubredditFromFile(gets.strip))
         puts "..."
         puts "Scraped Subreddit"
-        sleep(3)
+        sleep(2)
       else
         puts "..."
         puts "Error scraping Subreddit, try again"
-        sleep(3)
+        sleep(2)
       end
     end
-
-    def scrape_from_file
-
-    end
     
-    def list_users
-
+    def list_users(users)
+      users.sort_by{|i| i.name.downcase}.each_with_index do |user, index| 
+        puts user.name
+      end
+      puts ""
+      puts "Press enter to continue"
+      gets
     end
 
     def list_subreddits_by_user
@@ -85,6 +92,23 @@ module SubredditScraper
       puts ""
       puts "1. List Subreddits"
       puts "2. Exit"
+      subreddit_menu_select(gets)
+    end
+
+    def subreddit_menu_select(choice)
+       case choice.strip.to_i
+       when 1
+        Subreddit.all.sort_by{|i| i.name.downcase}.each{|i| puts i.name}
+        puts ""
+        puts "Press enter to continue"
+        gets
+       when 2
+        return 0
+       else
+        puts "Error please try again"
+        sleep(2)
+       end
+       subreddit_menu
     end
     
     def user_menu
@@ -95,6 +119,43 @@ module SubredditScraper
       puts "2. List Users by Subreddit"
       puts "3. List Posts by User"
       puts "4. Exit"
+      user_menu_select(gets)
+    end
+
+    def list_users_by_subreddit
+      print "Subreddits scraped are: "
+      Subreddit.all.sort_by{|i| i.name.downcase}.each{|i| print "#{i.name} "}
+      puts "\n"
+      puts "Please enter subreddit name"
+      subreddit = Subreddit.find_by_name(gets.strip)
+      puts ""
+      if !!subreddit
+        subreddit.posts.sort_by{|i| i.user.name.downcase}.each do |i| 
+          puts i.user.name
+        end
+        puts ""
+        puts "Press enter to continue"
+        gets
+      else
+        puts "Error please try again"
+        sleep(2)
+      end
+    end
+
+    def user_menu_select(choice)
+      case choice.strip.to_i
+      when 1
+        list_users(User.all)
+      when 2
+        list_users_by_subreddit
+      when 3
+      when 4
+        return 0
+      else
+        puts "Error please try again"
+        sleep(2)
+      end
+      user_menu
     end
     
     def post_menu
