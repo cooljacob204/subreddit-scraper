@@ -82,10 +82,6 @@ module SubredditScraper
       
     end
     
-    def list_posts_by_user
-      
-    end
-    
     def subreddit_menu
       puts "Subreddit Menu"
       puts "Please enter an option"
@@ -129,15 +125,32 @@ module SubredditScraper
       puts "Please enter subreddit name"
       subreddit = Subreddit.find_by_name(gets.strip)
       puts ""
-      if !!subreddit
-        subreddit.posts.sort_by{|i| i.user.name.downcase}.each do |i| 
-          puts i.user.name
-        end
+      if subreddit
+        subreddit.posts.map{|i| i.user.name}.sort.uniq.each{|name| puts name}
         puts ""
         puts "Press enter to continue"
         gets
       else
         puts "Error please try again"
+        sleep(2)
+      end
+    end
+
+    def list_posts_by_user
+      puts "Please enter a user's name"
+      user = User.find_by_name(gets.strip)
+      puts ""
+      if user
+        puts "---"
+        user.posts.sort_by{|i| i.title.downcase}.each do |post| 
+            puts post.title, post.subreddit.name
+            puts "---"
+        end
+        puts ""
+        puts "Press enter to continue"
+        gets
+      else
+        puts "User not found please try again"
         sleep(2)
       end
     end
@@ -149,6 +162,7 @@ module SubredditScraper
       when 2
         list_users_by_subreddit
       when 3
+        list_posts_by_user
       when 4
         return 0
       else
@@ -166,6 +180,44 @@ module SubredditScraper
       puts "2. List Posts by Subreddit"
       puts "3. List Posts by User"
       puts "4. Exit"
+      post_menu_select(gets)
+    end
+
+    def list_posts_by_subreddit
+      print "Subreddits scraped are: "
+      Subreddit.all.sort_by{|i| i.name.downcase}.each{|i| print "#{i.name} "}
+      puts "\n"
+      puts "Please enter subreddit name"
+      subreddit = Subreddit.find_by_name(gets.strip)
+      puts ""
+      if subreddit
+        subreddit.posts.sort_by{|i| i.title.downcase}.each{|i| puts i.title, "Author: #{i.user.name}", "---"}
+        puts ""
+        puts "Press enter to continue"
+        gets
+      else
+        puts "Error please try again"
+        sleep(2)
+      end
+    end
+
+    def post_menu_select(choice)
+      case choice.strip.to_i
+      when 1
+        Post.all.each{|i| puts i.title; puts "Subreddit: #{i.subreddit.name}, Author: #{i.user.name}\n---"}
+        puts ""
+        puts "Press enter to continue"
+        gets
+      when 2
+        list_posts_by_subreddit
+      when 3
+        list_posts_by_user
+      when 4
+        return 0
+      else
+        puts "Error please try again"
+      end
+      post_menu
     end
     
     before(*instance_methods){Gem.win_platform? ? (system "cls") : (system "clear")}
