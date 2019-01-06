@@ -5,7 +5,7 @@ require_relative "user_menu.rb"
 
 module SubredditScraper
   module Menu
-    def self.before(*names)
+    def self.before(*names) # used to append methods
       names.each do |name|
         m = instance_method(name)
         define_method(name) do |*args, &block|  
@@ -79,11 +79,11 @@ module SubredditScraper
       end
     end
 
-    include MainMenu
+    include MainMenu # adding all functionality from other menus
     include SubredditMenu
     include UserMenu
     include PostMenu
 
-    before(*instance_methods){Gem.win_platform? ? (system "cls") : (system "clear")}
+    before(*instance_methods){Gem.win_platform? ? (system "cls") : (system "clear")} # appending clearing the console to all methods to keep the console clear.
   end
 end
