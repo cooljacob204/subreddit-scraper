@@ -84,6 +84,6 @@ module SubredditScraper
     include UserMenu
     include PostMenu
 
-    before(*instance_methods){Gem.win_platform? ? (system "cls") : (system "clear")} # appending clearing the console to all methods to keep the console clear.
+    before(*instance_methods){Gem.win_platform? ? (system "cls") : (system "clear")} # appending clearing the console to all methods to keep the console clear
   end
 end
