@@ -1,7 +1,8 @@
 require 'bundler'
 require 'require_all'
-require 'nokogiri'
-require 'open-uri'
+require 'redd'
+require 'dotenv/load'
+
 Bundler.require
 require_all 'lib'
 
