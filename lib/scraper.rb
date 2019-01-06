@@ -1,16 +1,13 @@
 module SubredditScraper
   class Scraper
     def self.scrapeSubredditFromName(name)
+      session = Redd.it(
+        user_agent: 'Redd:RandomBot (by /u/cooljacob204)',
+        client_id: ENV['CLIENT_ID'],
+        secret: ENV['SECRET'] 
+        )
       begin
-        session = Redd.it(
-          user_agent: 'Redd:RandomBot (by /u/cooljacob204)',
-          client_id: ENV['CLIENT_ID'],
-          secret: ENV['SECRET'] 
-          )
-          subredditToParse = session.subreddit(name)
-        rescue
-          return false
-        end
+        subredditToParse = session.subreddit(name)
         subreddit = Subreddit.find_or_create_by_name_and_description(
           subredditToParse.title,
           subredditToParse.description,
@@ -24,6 +21,9 @@ module SubredditScraper
             :link => post.url
           )
         end
+      rescue
+        return false
+      end
       true
     end
   end
