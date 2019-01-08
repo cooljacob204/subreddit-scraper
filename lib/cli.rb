@@ -1,5 +1,3 @@
-require_all 'lib/menu'
-
 module SubredditScraper
   class Cli
     include Menu    

@@ -1,8 +1,3 @@
-require_relative "main_menu.rb"
-require_relative "post_menu.rb"
-require_relative "subreddit_menu.rb"
-require_relative "user_menu.rb"
-
 module SubredditScraper
   module Menu
     def self.before(*names) # used to append methods
