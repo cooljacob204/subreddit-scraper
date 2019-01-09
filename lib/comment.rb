@@ -7,6 +7,9 @@ module SubredditScraper
     @@all = []
     def initialize(comment, user, post)
       super()
+      @comment = comment
+      @user = user
+      @post = post
     end
 
     def self.all
