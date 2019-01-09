@@ -13,5 +13,6 @@ RSpec.configure do |config|
     User.reset_all
     Post.reset_all
     Subreddit.reset_all
+    Comment.reset_all
   end
 end
