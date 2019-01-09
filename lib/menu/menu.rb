@@ -74,6 +74,25 @@ module SubredditScraper
       end
     end
 
+    def list_comments_by_post
+      puts "Please enter a post's title"
+      post = Post.find_by_title(gets.strip)
+      puts ""
+      if post
+        puts "---"
+        post.comments.each do |comment| 
+            puts "Author: #{comment.user.name}\n", comment.comment
+            puts "---"
+        end
+        puts ""
+        puts "Press enter to continue"
+        gets
+      else
+        puts "Post not found please try again"
+        sleep(2)
+      end
+    end
+
     include MainMenu # adding all functionality from other menus
     include SubredditMenu
     include UserMenu

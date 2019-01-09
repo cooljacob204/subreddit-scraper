@@ -8,7 +8,8 @@ module SubredditScraper
         puts "1. List Posts"
         puts "2. List Posts by Subreddit"
         puts "3. List Posts by User"
-        puts "4. Exit"
+        puts "4. List Comments in a Post"
+        puts "5. Exit"
         post_menu_select(gets)
       end
 
@@ -24,6 +25,8 @@ module SubredditScraper
         when 3
           list_posts_by_user
         when 4
+          list_comments_by_post
+        when 5
           return 0
         else
           puts "Error please try again"

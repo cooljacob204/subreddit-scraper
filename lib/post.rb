@@ -20,5 +20,13 @@ module SubredditScraper
     def self.all
       @@all
     end
+
+    def self.find_by_title(title)
+      all.detect{|a| a.title == title}
+    end
+    
+    def comments
+      Comment.all.select{|i| i.post == self}
+    end
   end
 end

@@ -22,4 +22,11 @@ describe Post do
     new_post = Post.new("Test Meme", @subreddit, @user, :link => "lfp2.gg")
     expect(new_post.link == "lfp2.gg").to equal(true)
   end
+
+  it 'has many comments' do
+    Comment.new("test", @user, @post)
+    Comment.new("test2", @user, @post)
+    Comment.new("test2", @user, Post.new("test", @subreddit, @user))
+    expect(@post.comments.count).to equal(2)
+  end
 end
