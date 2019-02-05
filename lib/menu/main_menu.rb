@@ -34,7 +34,7 @@ module SubredditScraper
       
       def scrape
         puts "Please enter Subreddit name"
-        if (Scraper.scrapeSubredditFromName(gets.strip))
+        if (Scraper.scrape_subreddit_from_name(gets.strip))
           puts "..."
           puts "Scraped Subreddit"
           sleep(2)

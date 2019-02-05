@@ -1,18 +1,18 @@
 module SubredditScraper
   class Scraper
-    def self.scrapeSubredditFromName(name)
+    def self.scrape_subreddit_from_name(name)
       session = Redd.it(
         user_agent: 'Redd:RandomBot (by /u/cooljacob204)',
         client_id: ENV['CLIENT_ID'],
         secret: ENV['SECRET'] 
         )
       begin
-        subredditToParse = session.subreddit(name)
+        subreddit_to_parse = session.subreddit(name)
         subreddit = Subreddit.find_or_create_by_name_and_description(
-          subredditToParse.title,
-          subredditToParse.description,
+          subreddit_to_parse.title,
+          subreddit_to_parse.description,
           )
-          subredditToParse.hot.each do |post|
+          subreddit_to_parse.hot.each do |post|
             newpost = Post.new(
             post.title,
             subreddit,
