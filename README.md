@@ -6,7 +6,7 @@ This is an app for scraping data from subreddits. It uses Nokogiri and Open-Uri.
 
 `Scraper.scrape_subreddit_from_name(name)` 
 
-This method takes in a string that is a Subreddit's name and scraps it's front page. It stores the Subreddit's information in three types of objects: Subreddit, Users and Posts.
+This method takes in a string that is a Subreddit's name and scrapes it's front page. It stores the Subreddit's information in three types of objects: Subreddit, Users and Posts.
 
 `Scraper.scrap_post_comments(post)`
 
