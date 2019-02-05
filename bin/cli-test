@@ -4,5 +4,7 @@ require "bundler/setup"
 require "./config/environment"
 
 cli = Cli.new
-Scraper.scrapeSubredditFromName("ProgrammerHumor")
+binding.pry
+Scraper.scrape_subreddit_from_name("ProgrammerHumor")
+Scraper.scrap_post_comments(Post.all.first)
 cli.start

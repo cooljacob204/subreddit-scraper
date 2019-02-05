@@ -1,8 +1,8 @@
 
 require 'bundler'
 require 'require_all'
-require 'redd'
-require 'dotenv/load'
+require 'nokogiri'
+require 'open-uri'
 
 require_all 'lib/concerns' # load first
 

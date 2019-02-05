@@ -1,6 +1,6 @@
 module SubredditScraper
   class Post
-    attr_reader :title, :subreddit, :user, :text, :link, :date
+    attr_reader :title, :subreddit, :user, :text, :link, :date, :comments_url
     extend Memorable::ClassMethods
     include Memorable::InstanceMethods
 
@@ -15,6 +15,7 @@ module SubredditScraper
 
       @link = args[:link]
       @date = args[:date]
+      @comments_url = args[:comments]
     end
 
     def self.all

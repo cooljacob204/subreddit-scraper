@@ -5,7 +5,7 @@ module SubredditScraper
         puts "Main Menu"
         puts "Please enter an option"
         puts ""
-        puts "1. Scrape from URL"
+        puts "1. Scrape from Subreddit Name"
         puts "2. Display Subreddit Menu"
         puts "3. Display Post Menu"
         puts "4. Display User Menu"
@@ -34,7 +34,7 @@ module SubredditScraper
       
       def scrape
         puts "Please enter Subreddit name"
-        if (Scraper.scrapeSubredditFromName(gets.strip))
+        if (Scraper.scrape_subreddit_from_name(gets.strip))
           puts "..."
           puts "Scraped Subreddit"
           sleep(2)

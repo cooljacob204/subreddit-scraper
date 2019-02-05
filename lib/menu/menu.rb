@@ -78,8 +78,9 @@ module SubredditScraper
       puts "Please enter a post's title"
       post = Post.find_by_title(gets.strip)
       puts ""
-      if post
+      if post        
         puts "---"
+        Scraper.scrap_post_comments(post) if !post.comments[0]
         post.comments.each do |comment| 
             puts "Author: #{comment.user.name}\n", comment.comment
             puts "---"
