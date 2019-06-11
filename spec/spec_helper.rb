@@ -1,4 +1,4 @@
-require_relative "../config/environment.rb"
+require_relative "../lib/subreddit_scraper.rb"
 
 RSpec.configure do |config|
   # some (optional) config here
