@@ -2,6 +2,7 @@ require_relative "../lib/subreddit_scraper.rb"
 
 RSpec.configure do |config|
   # some (optional) config here
+  include SubredditScraper
 
   config.before(:each) do
     @user = User.new("cooljacob204")
