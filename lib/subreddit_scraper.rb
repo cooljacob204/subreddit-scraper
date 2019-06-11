@@ -13,6 +13,6 @@ require './lib/menu/user_menu.rb'
 require_all 'lib/menu' # load after other menu parts are loaded
 require_all 'lib' # load last
 
-module Subreddit
+module SubredditScaper
   class Error < StandardError; end
 end
