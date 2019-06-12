@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
 
-require "bundler/setup"
-require "./config/environment"
+require 'bundler/setup'
+require 'pry'
+require_relative '../lib/subreddit_scraper.rb'
 
-cli = Cli.new
-Scraper.scrape_subreddit_from_name("ProgrammerHumor")
-cli.start
+# SubredditScraper::Scraper.scrape_subreddit_from_name("ProgrammerHumor")
+SubredditScraper::Menu::MainMenu.start
