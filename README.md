@@ -13,19 +13,19 @@ These are the 4 primary objects used to store data.
 
 ### Subreddit
  * Has many Posts
- * Class Method #all keeps track of all created subreddits in a session.
+ * Class Method #all keeps track of all created Subreddit in a session.
  
 ### User
  * Has Many Posts
- * Class Method #all keeps track of all created subreddits in a session.
+ * Class Method #all keeps track of all created Users in a session.
  
 ### Post
  * Belongs to Subreddit
  * Belongs to a User
  * Has many Comments
- * Class Method #all keeps track of all created subreddits in a session.
+ * Class Method #all keeps track of all created Posts in a session.
  
 ### Comments
  * Belongs to Post
  * Belongs to User
- * Class Method #all keeps track of all created subreddits in a session.
+ * Class Method #all keeps track of all created Comments in a session.
